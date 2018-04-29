@@ -1,0 +1,2 @@
+To understand all the zookeeper config:  server/quorum/QuorumPeerConfig.java<br/>
+              Function to focus upon: public void parseProperties(Properties zkProp) <br/>    
