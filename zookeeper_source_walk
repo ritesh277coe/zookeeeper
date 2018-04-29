@@ -1,2 +1,8 @@
+Eclipse Debug to gdb debug cmds mapping:
+F5  ->  s (step)
+f6  ->  n (next)
+f7  ->  fin (finish)
+f8  ->  c (continue)
+
 To understand all the zookeeper config:  server/quorum/QuorumPeerConfig.java
-              Function to focus upon: public void parseProperties(Properties zkProp)
+              put break at function: public void parseProperties(Properties zkProp)
