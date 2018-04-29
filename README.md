@@ -54,7 +54,8 @@ To check status of running zookeeper: $./bin/zkServer.sh status<br/>
 To stop: $./bin/zkServer.sh stop<br/>
 **********************************************************************************************************************
 **********************************************************************************************************************
-**********************************************************************************************************************<br/>
+**********************************************************************************************************************
+<br/>
 Connecting to ZooKeeper with a Java-based shell:<br/>
 ${ZK_HOME}/bin/zkCli.sh –server zk_server_name/ip:port<br/>
 <br/>
@@ -71,166 +72,167 @@ WatchedEvent state:SyncConnected type:None path:null<br/>
 <br/>
 To see all the commands: help<br/>
 ZooKeeper -server host:port cmd args<br/>
-  connect host:port
-  get path [watch]
-  ls path [watch]
-  set path data [version]
-  rmr path
-  delquota [-n|-b] path
-  quit 
-  printwatches on|off
-  create [-s] [-e] path data acl
-  stat path [watch]
-  close 
-  ls2 path [watch]
-  history 
-  listquota path
-  setAcl path acl
-  getAcl path
-  sync path
-  redo cmdno
-  addauth scheme auth
-  delete path [version]
-  setquota -n|-b val path
-  
+  connect host:port<br/>
+  get path [watch]<br/>
+  ls path [watch]<br/>
+  set path data [version]<br/>
+  rmr path<br/><br/>
+  delquota [-n|-b] path<br/>
+  quit <br/>
+  printwatches on|off<br/>
+  create [-s] [-e] path data acl<br/>
+  stat path [watch]<br/>
+  close <br/>
+  ls2 path [watch]<br/>
+  history <br/>
+  listquota path<br/>
+  setAcl path acl<br/>
+  getAcl path<br/>
+  sync path<br/>
+  redo cmdno<br/>
+  addauth scheme auth<br/>
+  delete path [version]<br/>
+  setquota -n|-b val path<br/>
+  <br/>
 **********************************************************************************************************************
 **********************************************************************************************************************
 **********************************************************************************************************************
-Connecting to ZooKeeper with a C-based shell
-${ZK_HOME}/src/c
-$ ./configure -prefix="/home/tom/work/zookeeper_kafka/cbin"
-$ make
-$ make install
+<br/>
+Connecting to ZooKeeper with a C-based shell<br/>
+${ZK_HOME}/src/c<br/>
+$ ./configure -prefix="/home/tom/work/zookeeper_kafka/cbin"<br/>
+$ make<br/>
+$ make install<br/>
+<br/>
+It will create folders: bin, include and lib. Inside bin, clis_st (single thread) cli_mt (multi thread)<br/>
+<br/>
+$./bin/cli_mt localhost:2181<br/>
+Watcher SESSION_EVENT state = CONNECTED_STATE<br/><br/>
+Got a new session id: 0x148b540cc4d0004<br/>
+<br/>
+$help<br/>
+<br/>
 
-It will create folders: bin, include and lib. Inside bin, clis_st (single thread) cli_mt (multi thread)
-
-$./bin/cli_mt localhost:2181
-Watcher SESSION_EVENT state = CONNECTED_STATE
-Got a new session id: 0x148b540cc4d0004
-
-$help
-
-
-single node zookeeper = standalone not recommended for production as this becomes single point of failure.
-multinode zookeeper with replicated mode on = zookeeper ensemble
-Multiple zookeeper instances running on multiple machines using the same config file is called quoram. Zookeeper has leader follower model
-
+single node zookeeper = standalone not recommended for production as this becomes single point of failure.<br/>
+multinode zookeeper with replicated mode on = zookeeper ensemble<br/>
+Multiple zookeeper instances running on multiple machines using the same config file is called quoram. Zookeeper has leader follower model<br/>
+<br/>
 **********************************************************************************************************************
 **********************************************************************************************************************
 **********************************************************************************************************************
-
-Setting up a multinode ZooKeeper cluster
-tickTime=2000
-dataDir=/var/lib/zookeeper
-clientPort=2181					//clients connect to zookeeper server at this port
-initLimit=5						//initLimit: This parameter is the timeout, specified in number of ticks, for a follower to initially connect to a leader
-syncLimit=2						//This is the timeout, specified in number of ticks, for a follower to sync with a leader
-server.1=zoo1:2888:3888			//2888 is port where zookeeper follower will connect to leader
-server.2=zoo2:2888:3888			//3888 is port used by zookeeper servers to select leader.
-server.3=zoo3:2888:3888
-
-Just do: ${ZK_HOME}/bin/zkServer.sh start
-on all the machines
-
-Then to check status: ${ZK_HOME}/bin/zkServer.sh status
-output can be like:
-[zoo1] # ${ZK_HOME}/bin/zkServer.sh status
-JMX enabled by default
-Using config: /usr/share/zookeeper-3.4.6/bin/../conf/zoo.cfg
-Mode: follower
-[zoo2] # ${ZK_HOME}/bin/zkServer.sh status
-JMX enabled by default
-Using config: /usr/share/zookeeper-3.4.6/bin/../conf/zoo.cfg
-Mode: leader
-[zoo3] # ${ZK_HOME}/bin/zkServer.sh status
-JMX enabled by default
-Using config: /usr/share/zookeeper-3.4.6/bin/../conf/zoo.cfg
-Mode: follower
-
-
-To connect client:
-$zk_Cli.sh zoo1:2181,zoo2:2181,zoo3:2181
-Connecting to zoo1:2181, zoo2:2181, zoo3:2181
-… … … …
-Welcome to ZooKeeper!
-… … … …
-[zk: zoo1:2181,zoo2:2181,zoo3:2181 (CONNECTED) 0]
-
+<br/>
+Setting up a multinode ZooKeeper cluster<br/>
+tickTime=2000<br/>
+dataDir=/var/lib/zookeeper<br/>
+clientPort=2181					//clients connect to zookeeper server at this port<br/>
+initLimit=5					//initLimit: This parameter is the timeout, specified in number of ticks, for a follower 						 //to initially connect to a leader<br/>
+syncLimit=2					//This is the timeout, specified in number of ticks, for a follower to sync with a 							//leader<br/>
+server.1=zoo1:2888:3888				//2888 is port where zookeeper follower will connect to leader<br/>
+server.2=zoo2:2888:3888				//3888 is port used by zookeeper servers to select leader.<br/>
+server.3=zoo3:2888:3888<br/>
+<br/>
+Just do: ${ZK_HOME}/bin/zkServer.sh start<br/>
+on all the machines<br/>
+<br/>
+Then to check status: ${ZK_HOME}/bin/zkServer.sh status<br/>
+output can be like:<br/>
+[zoo1] # ${ZK_HOME}/bin/zkServer.sh status<br/>
+JMX enabled by default<br/>
+Using config: /usr/share/zookeeper-3.4.6/bin/../conf/zoo.cfg<br/>
+Mode: follower<br/>
+[zoo2] # ${ZK_HOME}/bin/zkServer.sh status<br/>
+JMX enabled by default<br/>
+Using config: /usr/share/zookeeper-3.4.6/bin/../conf/zoo.cfg<br/>
+Mode: leader<br/>
+[zoo3] # ${ZK_HOME}/bin/zkServer.sh status<br/>
+JMX enabled by default<br/>
+Using config: /usr/share/zookeeper-3.4.6/bin/../conf/zoo.cfg<br/>
+Mode: follower<br/>
+<br/>
+<br/>
+To connect client:<br/>
+$zk_Cli.sh zoo1:2181,zoo2:2181,zoo3:2181<br/>
+Connecting to zoo1:2181, zoo2:2181, zoo3:2181<br/>
+… … … …<br/>
+Welcome to ZooKeeper!<br/>
+… … … …<br/>
+[zk: zoo1:2181,zoo2:2181,zoo3:2181 (CONNECTED) 0]<br/>
+<br/>
+**********************************************************************************************************************<br/>
+Running multiple node modes for ZooKeeper::<br/>
+Config file1:<br/>
+tickTime=2000<br/>
+initLimit=5<br/>
+syncLimit=2<br/>
+dataDir=/var/lib/zoo1<br/>
+clientPort=2181<br/>
+server.1=localhost:2666:3666<br/>
+server.2=localhost:2667:3667<br/>
+server.3=localhost:2668:3668<br/>
+<br/>
+Config file1:<br/>
+tickTime=2000<br/>
+initLimit=5<br/>
+syncLimit=2<br/>
+dataDir=/var/lib/zoo2<br/>
+clientPort=2182<br/>
+server.1=localhost:2666:3666<br/>
+server.2=localhost:2667:3667<br/>
+server.3=localhost:2668:3668<br/>
+<br/>
+Config file1:<br/>
+tickTime=2000<br/>
+initLimit=5<br/>
+syncLimit=2<br/>
+dataDir=/var/lib/zoo3<br/>
+clientPort=2183<br/>
+server.1=localhost:2666:3666<br/>
+server.2=localhost:2667:3667<br/>
+server.3=localhost:2668:3668<br/>
+<br/>
+We also need to fix the server ID parameter correctly in the myid file for each instance. This can be done using the following three commands:<br/>
+<br/>
+$ echo 1 > /var/lib/zookeeper/zoo1/myid<br/>
+$ echo 2 > /var/lib/zookeeper/zoo2/myid<br/>
+$ echo 3 > /var/lib/zookeeper/zoo3/myid<br/>
+Now, we are all set to start the ZooKeeper instances. Let's start the instances as follows:<br/>
+<br/>
+$ ${ZK_HOME}/bin/zkServer.sh start ${ZK_HOME}/conf/zoo1.cfg<br/>
+$ ${ZK_HOME}/bin/zkServer.sh start ${ZK_HOME}/conf/zoo2.cfg<br/>
+$ ${ZK_HOME}/bin/zkServer.sh start ${ZK_HOME}/conf/zoo3.cfg<br/>
+Once all the instances start, we can use the zkCli.sh script to connect to the multinode ZooKeeper cluster, like we did earlier:<br/>
+<br/>
+$ ${ZK_HOME}/bin/zkCli.sh –server  localhost:2181, localhost:2182, localhost:2183<br/>
 **********************************************************************************************************************
-Running multiple node modes for ZooKeeper::
-Config file1:
-tickTime=2000
-initLimit=5
-syncLimit=2
-dataDir=/var/lib/zoo1
-clientPort=2181
-server.1=localhost:2666:3666
-server.2=localhost:2667:3667
-server.3=localhost:2668:3668
-
-Config file1:
-tickTime=2000
-initLimit=5
-syncLimit=2
-dataDir=/var/lib/zoo2
-clientPort=2182
-server.1=localhost:2666:3666
-server.2=localhost:2667:3667
-server.3=localhost:2668:3668
-
-Config file1:
-tickTime=2000
-initLimit=5
-syncLimit=2
-dataDir=/var/lib/zoo3
-clientPort=2183
-server.1=localhost:2666:3666
-server.2=localhost:2667:3667
-server.3=localhost:2668:3668
-
-We also need to fix the server ID parameter correctly in the myid file for each instance. This can be done using the following three commands:
-
-$ echo 1 > /var/lib/zookeeper/zoo1/myid
-$ echo 2 > /var/lib/zookeeper/zoo2/myid
-$ echo 3 > /var/lib/zookeeper/zoo3/myid
-Now, we are all set to start the ZooKeeper instances. Let's start the instances as follows:
-
-$ ${ZK_HOME}/bin/zkServer.sh start ${ZK_HOME}/conf/zoo1.cfg
-$ ${ZK_HOME}/bin/zkServer.sh start ${ZK_HOME}/conf/zoo2.cfg
-$ ${ZK_HOME}/bin/zkServer.sh start ${ZK_HOME}/conf/zoo3.cfg
-Once all the instances start, we can use the zkCli.sh script to connect to the multinode ZooKeeper cluster, like we did earlier:
-
-$ ${ZK_HOME}/bin/zkCli.sh –server  localhost:2181, localhost:2182, localhost:2183
-**********************************************************************************************************************
-
-Nodes:
-Persistent: Persist unless someone deletes it. Can be deleted by any authorized client.
-			create /[root] "root_data"
-			get /[root]
-			
-Ephemeral: Lifespan of the client that created it, But visible to all clients depending upon ACL. Can be deleted by any authorized client. Ephemeral can not have children.
-			[zk: localhost(CONNECTED) 1] create -e /[PacktPub] "ApacheZooKeeper"
-			Created /[PacktPub]
-			
-			[zk: localhost(CONNECTED) 2] create -e /[PacktPub]/EphemeralChild "ChildOfEphemeralZnode"
-			Ephemerals cannot have children: /[PacktPub]/EphemeralChild
-sequence: A sequential znode is assigned a sequence number by ZooKeeper as a part of its name during its creation. The value of a monotonously increasing counter
-		(maintained by the parent znode) is appended to the name of the znode.
-		Since both persistent and ephemeral znodes can be sequential znodes, we have a total of four modes of znodes:
-		• persistent
-		• ephemeral
-		• persistent_sequential
-		• ephemeral_sequential
-
-		[zk: localhost(CONNECTED) 1] create -s /[PacktPub] "PersistentSequentialZnode"
-		Created /[PacktPub]0000000001
-		[zk: localhost(CONNECTED) 3] create -s -e /[PacktPub] "EphemeralSequentialZnode"
-		Created /[PacktPub]0000000008
-		
-WATCHES:
-		Clients can register with the ZooKeeper service for any changes associated with a znode. This registration is known as setting a watch on a znode in ZooKeeper terminology.
-		A watch is a one-time operation, which means that it triggers only one notification. To continue receiving notifications over time, the client must reregister the watch upon 
-		receiving each event notification.
+<br/>
+<br/>
+Nodes:<br/>
+Persistent: Persist unless someone deletes it. Can be deleted by any authorized client.<br/>
+			create /[root] "root_data"	<br/>
+			get /[root]			<br/>
+			<br/>		
+Ephemeral: Lifespan of the client that created it, But visible to all clients depending upon ACL. Can be deleted by any authorized client. Ephemeral can not have children.<br/>
+			[zk: localhost(CONNECTED) 1] create -e /[PacktPub] "ApacheZooKeeper"<br/>
+			Created /[PacktPub]<br/>
+			<br/>		
+			[zk: localhost(CONNECTED) 2] create -e /[PacktPub]/EphemeralChild "ChildOfEphemeralZnode"<br/>
+			Ephemerals cannot have children: /[PacktPub]/EphemeralChild<br/>
+sequence: A sequential znode is assigned a sequence number by ZooKeeper as a part of its name during its creation. The value of a monotonously increasing counter<br/>
+		(maintained by the parent znode) is appended to the name of the znode.<br/>
+		Since both persistent and ephemeral znodes can be sequential znodes, we have a total of four modes of znodes:<br/>
+		• persistent<br/>
+		• ephemeral<br/>
+		• persistent_sequential<br/>
+		• ephemeral_sequential<br/>
+<br/>
+		[zk: localhost(CONNECTED) 1] create -s /[PacktPub] "PersistentSequentialZnode"<br/>
+		Created /[PacktPub]0000000001<br/>
+		[zk: localhost(CONNECTED) 3] create -s -e /[PacktPub] "EphemeralSequentialZnode"<br/>
+		Created /[PacktPub]0000000008<br/>
+	<br/>	
+WATCHES:<br/>
+		Clients can register with the ZooKeeper service for any changes associated with a znode. This registration is known as setting a watch on a znode in ZooKeeper terminology.<br/>
+		A watch is a one-time operation, which means that it triggers only one notification. To continue receiving notifications over time, the client must reregister the watch upon receiving each event notification.<br/>
 		
 		Although ZooKeeper guarantees that all registered watches get dispatched to the client, even if the client disconnects from one server and reconnects to another server
 		within the ZooKeeper service, there is one possible scenario worth mentioning where a watch might be missed by a client. This specific scenario is when a client has set a
