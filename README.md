@@ -5,7 +5,8 @@ Zookeeper cheat sheet, source code explanation
 ZooKeeper APIs to solve the problems of distributed synchronization, cluster configuration management, group membership.
 **********************************************************************************************************************
 
-$ wget http://www.gtlib.gatech.edu/pub/apache/zookeeper/stable/zookeeper-3.4.6.tar.gz$ ls -alh zookeeper-3.4.6.tar.gz
+$ wget http://www.gtlib.gatech.edu/pub/apache/zookeeper/stable/zookeeper-3.4.6.tar.gz<br/>
+$ ls -alh zookeeper-3.4.6.tar.gz<br/>
 -rw-rw-r-- 1 saurav saurav 17M Feb 20  2014 zookeeper-3.4.6.tar.gz
 
 Installing
@@ -289,10 +290,10 @@ that either all the updates succeed or the whole bunch of updates fails in its e
 • Write requests: These are forwarded to the leader and go through majority consensus before a response is generated
 
 Zookeeper usage: 
-              Group membership
-							Leader Election
-							Dynamic configuration
-							Status Monitoring
-							Queuing
-							Barriers
-							Critical sections
+        Group membership
+	Leader Election
+	Dynamic configuration
+	Status Monitoring
+	Queuing
+	Barriers
+	Critical sections
