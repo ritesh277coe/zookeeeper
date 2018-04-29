@@ -231,26 +231,22 @@ sequence: A sequential znode is assigned a sequence number by ZooKeeper as a par
 		Created /[PacktPub]0000000008<br/>
 	<br/>	
 WATCHES:<br/>
-		Clients can register with the ZooKeeper service for any changes associated with a znode. This registration is known as setting a watch on a znode in ZooKeeper terminology.<br/>
-		A watch is a one-time operation, which means that it triggers only one notification. To continue receiving notifications over time, the client must reregister the watch upon receiving each event notification.<br/>
-		
-		Although ZooKeeper guarantees that all registered watches get dispatched to the client, even if the client disconnects from one server and reconnects to another server
-		within the ZooKeeper service, there is one possible scenario worth mentioning where a watch might be missed by a client. This specific scenario is when a client has set a
-		watch for the existence of a znode that has not yet been created. In this case, a watch event will be missed if the znode is created, and deleted while the client is in the
-		disconnected state.
-		
-The ZooKeeper operations:
-	Operation 	Description
-	create 		Creates a znode in a specified path of the ZooKeeper namespace
-	delete 		Deletes a znode from a specified path of the ZooKeeper namespace
-	exists 		Checks if a znode exists in the path
-	getChildren Gets a list of children of a znode
-	getData 	Gets the data associated with a znode
-	setData 	Sets/writes data into the data field of a znode
-	getACL 		Gets the ACL of a znode
-	setACL 		Sets the ACL in a znode
-	sync 		Synchronizes a client's view of a znode with ZooKeeper
-	
+		Clients can register with the ZooKeeper service for any changes associated with a znode. This registration is known as setting a watch on a znode in ZooKeeper terminology. A watch is a one-time operation, which means that it triggers only one notification. To continue receiving notifications over time, the client must reregister the watch upon receiving each event notification.<br/>
+	<br/>	
+		Although ZooKeeper guarantees that all registered watches get dispatched to the client, even if the client disconnects from one server and reconnects to another server	within the ZooKeeper service, there is one possible scenario worth mentioning where a watch might be missed by a client. This specific scenario is when a client has set a watch for the existence of a znode that has not yet been created. In this case, a watch event will be missed if the znode is created, and deleted while the client is in the	disconnected state.<br/>
+	<br/>	
+The ZooKeeper operations:<br/>
+	Operation 	Description<br/>
+	create 		Creates a znode in a specified path of the ZooKeeper namespace<br/>
+	delete 		Deletes a znode from a specified path of the ZooKeeper namespace<br/>
+	exists 		Checks if a znode exists in the path<br/>
+	getChildren Gets a list of children of a znode<br/>
+	getData 	Gets the data associated with a znode<br/>
+	setData 	Sets/writes data into the data field of a znode<br/>
+	getACL 		Gets the ACL of a znode<br/>
+	setACL 		Sets the ACL in a znode<br/>
+	sync 		Synchronizes a client's view of a znode with ZooKeeper<br/>
+	<br/>
 	
 	1. Create a znode called root with ThisIsTheRootNode as its data:
 	[zk: localhost(CONNECTED) 0] create /root "ThisIsTheRootNode"
@@ -284,18 +280,17 @@ The ZooKeeper operations:
 	10. List the content of root:
 	[zk: localhost(CONNECTED) 9] ls2 /root
 	[]
-
-ZooKeeper also supports batch updates to znodes with an operation called multi. This batches together multiple primitive operations into a single unit. A multi operation is also atomic in nature, which means
-that either all the updates succeed or the whole bunch of updates fails in its entirety.
-
-• Read requests: These are processed locally in the ZooKeeper server to which the client is currently connected
-• Write requests: These are forwarded to the leader and go through majority consensus before a response is generated
-
-Zookeeper usage: 
-        Group membership
-	Leader Election
-	Dynamic configuration
-	Status Monitoring
-	Queuing
-	Barriers
-	Critical sections
+<br/>
+ZooKeeper also supports batch updates to znodes with an operation called multi. This batches together multiple primitive operations into a single unit. A multi operation is also atomic in nature, which means that either all the updates succeed or the whole bunch of updates fails in its entirety.
+<br/>
+• Read requests: These are processed locally in the ZooKeeper server to which the client is currently connected<br/>
+• Write requests: These are forwarded to the leader and go through majority consensus before a response is generated<br/>
+<br/>
+Zookeeper usage: <br/>
+        Group membership<br/>
+	Leader Election<br/>
+	Dynamic configuration<br/><br/>
+	Status Monitoring<br/>
+	Queuing<br/>
+	Barriers<br/>
+	Critical sections<br/>
