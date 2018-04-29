@@ -9,68 +9,68 @@ $ wget http://www.gtlib.gatech.edu/pub/apache/zookeeper/stable/zookeeper-3.4.6.t
 $ ls -alh zookeeper-3.4.6.tar.gz<br/>
 -rw-rw-r-- 1 saurav saurav 17M Feb 20  2014 zookeeper-3.4.6.tar.gz
 
-Installing
-$ tar -C /usr/share -zxf zookeeper-3.4.6.tar.gz
-$ cd /usr/share/zookeeper-3.4.6/
-$ ls 
-bin      CHANGES.txt      contrib      docs      ivy.xml  LICENSE.txt      README_packaging.txt      recipes  zookeeper-3.4.6.jar      zookeeper-3.4.6.jar.md5 
-build.xml      conf      dist-maven      ivysettings.xml  lib      NOTICE.txt      README.txt      src       zookeeper-3.4.6.jar.asc  zookeeper-3.4.6.jar.sha1
+Installing<br/>
+$ tar -C /usr/share -zxf zookeeper-3.4.6.tar.gz<br/>
+$ cd /usr/share/zookeeper-3.4.6/<br/>
+$ ls <br/>
+bin      CHANGES.txt      contrib      docs      ivy.xml  LICENSE.txt      README_packaging.txt      recipes  zookeeper-3.4.6.jar      zookeeper-3.4.6.jar.md5 <br/>
+build.xml      conf      dist-maven      ivysettings.xml  lib      NOTICE.txt      README.txt      src       zookeeper-3.4.6.jar.asc  zookeeper-3.4.6.jar.sha1	<br/>
+<br/>
+$ export ZK_HOME=/usr/share/zookeeper-3.4.6<br/>
 
-$ export ZK_HOME=/usr/share/zookeeper-3.4.6
+Configuration:<br/>
+$ cat conf/zoo.cfg<br/>
+tickTime=2000 (in ms)<br/>
+dataDir=/var/lib/zookeeper (This is the location to store the in-memory state of ZooKeeper; it includes database snapshots and the transaction log of updates to the database. Extracting the ZooKeeper archive won't create this directory, so if this directory doesn't exist in the system, you will need to create it and set writable permission to it.)<br/>
+clientPort=2181 (client connects at this port)<br/>
+<br/>
+Need JAVA:<br/>
+$java --version<br/>
+export JAVA_HOME=/usr/ instead of /usr/bin<br/>
+what is jps?<br/>
+<br/>
+Starting the ZooKeeper server in standalone mode:<br/>
+$./bin/zkServer.sh<br/>
+./bin/zkServer.sh<br/>
+JMX enabled by default<br/>
+Using config: /home/tom/work/zookeeper_kafka/zookeeper-3.4.6/bin/../conf/zoo.cfg<br/>
+Usage: ./bin/zkServer.sh {start|start-foreground|stop|restart|status|upgrade|print-cmd}<br/>
 
-Configuration:
-$ cat conf/zoo.cfg
-tickTime=2000 (in ms)
-dataDir=/var/lib/zookeeper (This is the location to store the in-memory state of ZooKeeper; it includes database snapshots and the transaction log of updates to the database. Extracting the ZooKeeper archive won't create this directory, so if this directory doesn't exist in the system, you will need to create it and set writable permission to it.)
-clientPort=2181 (client connects at this port)
-
-Need JAVA:
-$java --version
-export JAVA_HOME=/usr/ instead of /usr/bin
-what is jps?
-
-Starting the ZooKeeper server in standalone mode:
-$./bin/zkServer.sh
-./bin/zkServer.sh
-JMX enabled by default
-Using config: /home/tom/work/zookeeper_kafka/zookeeper-3.4.6/bin/../conf/zoo.cfg
-Usage: ./bin/zkServer.sh {start|start-foreground|stop|restart|status|upgrade|print-cmd}
-
-So to start, we can either:
-$./bin/zkServer.sh start (runs the server in backgroud)
-OR
-$./bin/zkServer.sh start-foreground (runs in foreground)
-
-$ps –ef | grep zookeeper 
-5511 (pid of zookeeper)
-
-$ which jps  //jps is like ps..just showing all java programs
-jps is /usr/bin/jps
-$ jps
-5511 QuorumPeerMain
-5565 Jps
-
-To check status of running zookeeper: $./bin/zkServer.sh status
-To stop: $./bin/zkServer.sh stop
+So to start, we can either:<br/>
+$./bin/zkServer.sh start (runs the server in backgroud)<br/>
+OR<br/>
+$./bin/zkServer.sh start-foreground (runs in foreground)<br/>
+<br/>
+$ps –ef | grep zookeeper <br/>
+5511 (pid of zookeeper)<br/>
+<br/>
+$ which jps  //jps is like ps..just showing all java programs<br/>
+jps is /usr/bin/jps<br/>
+$ jps<br/>
+5511 QuorumPeerMain<br/>
+5565 Jps<br/>
+<br/>
+To check status of running zookeeper: $./bin/zkServer.sh status<br/>
+To stop: $./bin/zkServer.sh stop<br/>
 **********************************************************************************************************************
 **********************************************************************************************************************
-**********************************************************************************************************************
-Connecting to ZooKeeper with a Java-based shell:
-${ZK_HOME}/bin/zkCli.sh –server zk_server_name/ip:port
-
-${ZK_HOME}/bin/zkCli.sh –server localhost:2181
-Connecting to localhost:2181
-...............
-...............
-Welcome to ZooKeeper!
-JLine support is enabled
-...............
-WATCHER::
-WatchedEvent state:SyncConnected type:None path:null
-[zk: localhost:2181(CONNECTED) 0]
-
-To see all the commands: help
-ZooKeeper -server host:port cmd args
+**********************************************************************************************************************<br/>
+Connecting to ZooKeeper with a Java-based shell:<br/>
+${ZK_HOME}/bin/zkCli.sh –server zk_server_name/ip:port<br/>
+<br/>
+${ZK_HOME}/bin/zkCli.sh –server localhost:2181<br/>
+Connecting to localhost:2181<br/>
+...............<br/>
+...............<br/>
+Welcome to ZooKeeper!<br/>
+JLine support is enabled<br/>
+...............<br/>
+WATCHER::<br/>
+WatchedEvent state:SyncConnected type:None path:null<br/>
+[zk: localhost:2181(CONNECTED) 0]<br/>
+<br/>
+To see all the commands: help<br/>
+ZooKeeper -server host:port cmd args<br/>
   connect host:port
   get path [watch]
   ls path [watch]
