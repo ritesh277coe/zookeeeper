@@ -1,3 +1,9 @@
+Install Eclipse and JDK: 
+https://www.ntu.edu.sg/home/ehchua/programming/howto/EclipseJava_HowTo.html
+
+JDK installation:
+https://www.ntu.edu.sg/home/ehchua/programming/howto/JDK_HowTo.html#jdk-install
+
 Eclipse Debug to gdb debug cmds mapping:
 F5  ->  s (step)
 f6  ->  n (next)
